@@ -1,5 +1,62 @@
-# Python virtual enviroment
-venv/*
+# =========================================================================
+# Python Git Ignore
+# =========================================================================
 
-# Environment variables
+# Virtual Environments (Local environment folders)
+venv/
+venv.bak/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment variables / Secrets / Configuration files
 .env
+.env.*
+*.env.docker
+
+# IDEs and editors configurations
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# =========================================================================
+# Terraform Git Ignore
+# =========================================================================
+
+# Local .terraform directories (contains provider plugins and modules)
+**/.terraform/
+
+# .tfstate files contain sensitive data (passwords, secrets, etc.)
+*.tfstate
+*.tfstate.*
+
+# Exclude all variable files containing sensitive credentials
+*.tfvars
+*.tfvars.json
+
+# Plan output / crash logs / local overrides
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+override.tf.json
+
+# =========================================================================
+# Project data
+# =========================================================================
+# Review before committing: if /data holds real internal documents rather
+# than sample/public ones, keep this folder out of the repo.
+data/*
+!data/.gitkeep

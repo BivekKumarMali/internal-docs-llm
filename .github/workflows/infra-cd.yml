@@ -1,0 +1,38 @@
+name: Terraform Apply (dev)
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - "infra/**"
+      - ".github/workflows/terraform-dev.yml"
+
+defaults:
+  run:
+    working-directory: infra
+
+permissions:
+  contents: read
+
+env:
+  TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
+  TF_WORKSPACE: ${{ secrets.TF_WORKSPACE }}
+
+jobs:
+  apply:
+    name: Apply
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
