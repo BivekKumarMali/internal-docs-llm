@@ -1,6 +1,8 @@
 # Random suffix so the storage account name doesn't collide with someone
 # else's account anywhere in Azure (storage account names are globally
-# unique, unlike most other Azure resource names).
+# unique, unlike most other Azure resource names). Don't remove this —
+# "internaldocsllm" alone is specific enough to probably be free right now,
+# but there's no guarantee, and a naming collision fails the whole apply.
 resource "random_string" "storage_suffix" {
   length  = 4
   special = false
