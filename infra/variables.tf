@@ -1,7 +1,13 @@
 variable "location" {
   type        = string
   default     = "centralindia"
-  description = "Location of the resource group. Must be a region Azure Cognitive Services (OpenAI) actually supports — indiasouthcentral was not a real region and failed on apply."
+  description = "Location for most resources (resource group, storage, search). Azure OpenAI uses a separate variable (openai_location) since it's only available in a narrower set of regions — see openai_location below."
+}
+
+variable "openai_location" {
+  type        = string
+  default     = "eastus"
+  description = "Azure OpenAI is not available in every region Cognitive Services generally supports. No India region currently supports it, so this is deliberately separate from var.location. eastus is one of the most reliably available regions for new Azure OpenAI deployments."
 }
 
 variable "app_name" {

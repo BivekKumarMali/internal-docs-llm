@@ -1,6 +1,6 @@
 resource "azurerm_cognitive_account" "openai" {
   name                = local.openai-name
-  location            = var.location
+  location            = var.openai_location # Azure OpenAI isn't available in centralindia — see variables.tf
   kind                = "OpenAI"
   sku_name            = "S0"
   resource_group_name = azurerm_resource_group.rag_rg.name
