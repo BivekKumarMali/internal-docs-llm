@@ -1,7 +1,7 @@
 variable "location" {
   type        = string
-  default     = "indiasouthcentral"
-  description = "Location of the resource group."
+  default     = "centralindia"
+  description = "Location of the resource group. Must be a region Azure Cognitive Services (OpenAI) actually supports — indiasouthcentral was not a real region and failed on apply."
 }
 
 variable "app_name" {

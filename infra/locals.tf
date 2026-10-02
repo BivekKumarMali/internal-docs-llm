@@ -4,7 +4,8 @@ locals {
   search_service_name             = "${var.app_name}-search"
   model-deployment-chat-name      = "${var.app_name}-chat"
   model-deployment-embedding-name = "${var.app_name}-text-embedding"
-  storage_account_name            = "storage"
+
+  storage_account_prefix = replace(lower(var.app_name), "-", "")
 
   common_tags = {
     project     = var.app_name
