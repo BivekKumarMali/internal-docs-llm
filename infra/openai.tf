@@ -54,7 +54,7 @@ resource "azurerm_search_service" "search" {
   name                = local.search_service_name # Must be globally unique (lowercase)
   resource_group_name = azurerm_resource_group.rag_rg.name
   location            = var.location
-  sku                 = "basic"
+  sku                 = "free"
 
   replica_count   = 1
   partition_count = 1

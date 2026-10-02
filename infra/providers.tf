@@ -7,12 +7,6 @@ terraform {
   }
 
   cloud {
-    
-    organization = "master-ai"
-
-    workspaces {
-      name = "internal-docs-llm-infra-dev"
-    }
   }
 }
 
