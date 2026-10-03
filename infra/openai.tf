@@ -1,6 +1,6 @@
 resource "azurerm_cognitive_account" "openai" {
   name                = local.openai-name
-  location            = var.location
+  location            = var.location # Azure OpenAI isn't available in centralindia — see variables.tf
   kind                = "OpenAI"
   sku_name            = "S0"
   resource_group_name = azurerm_resource_group.rag_rg.name
@@ -19,33 +19,38 @@ resource "azurerm_cognitive_deployment" "chat_model" {
   cognitive_account_id = azurerm_cognitive_account.openai.id
 
   sku {
-    name     = "Standard" # Pay-as-you-go billing
-    capacity = 10         # 10,000 Tokens-Per-Minute (TPM)
+    name     = "GlobalStandard" 
+    capacity = 1                
   }
 
   model {
     format  = "OpenAI"
-    name    = var.chat_model_name
-    version = "2024-07-18"
+    name    = "gpt-4o-mini"     
+    version = "2024-07-18"      
   }
+
+  version_upgrade_option = "OnceCurrentVersionExpired"
 }
 
-#b. Embedding Model Deployment (text-embedding-3-small)
+# Low-Cost Embedding Model Deployment for Testing (text-embedding-3-small)
 resource "azurerm_cognitive_deployment" "embedding_model" {
   name                 = var.embedding_model_name
   cognitive_account_id = azurerm_cognitive_account.openai.id
 
   sku {
-    name     = "Standard" # Pay-as-you-go billing
-    capacity = 10         # 10,000 Tokens-Per-Minute (TPM)
+    name     = "GlobalStandard" 
+    capacity = 1                
   }
 
   model {
     format  = "OpenAI"
-    name    = var.embedding_model_name
-    version = "1"
+    name    = "text-embedding-3-small"
+    version = "1"                      
   }
+
+  version_upgrade_option = "OnceCurrentVersionExpired" 
 }
+
 
 # -----------------------------------------------------------------------------
 # 3. Azure AI Search Service (Basic Tier)

@@ -1,5 +1,16 @@
+# Random suffix so the storage account name doesn't collide with someone
+# else's account anywhere in Azure (storage account names are globally
+# unique, unlike most other Azure resource names). Don't remove this —
+# "internaldocsllm" alone is specific enough to probably be free right now,
+# but there's no guarantee, and a naming collision fails the whole apply.
+resource "random_string" "storage_suffix" {
+  length  = 4
+  special = false
+  upper   = false
+}
+
 resource "azurerm_storage_account" "storage" {
-  name                     = local.storage_account_name
+  name                     = "${local.storage_account_prefix}st${random_string.storage_suffix.result}"
   resource_group_name      = azurerm_resource_group.rag_rg.name
   location                 = var.location
   account_tier             = "Standard"
