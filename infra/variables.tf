@@ -1,6 +1,6 @@
 variable "location" {
   type        = string
-  default     = "centralindia"
+  default     = "southindia"
   description = "Location for most resources (resource group, storage, search). Azure OpenAI uses a separate variable (openai_location) since it's only available in a narrower set of regions — see openai_location below."
 }
 
