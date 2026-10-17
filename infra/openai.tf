@@ -1,6 +1,6 @@
 resource "azurerm_cognitive_account" "openai" {
   name                = local.openai-name
-  location            = var.location # Azure OpenAI isn't available in centralindia — see variables.tf
+  location            = var.openai_location # Azure OpenAI isn't available in centralindia — see variables.tf
   kind                = "OpenAI"
   sku_name            = "S0"
   resource_group_name = azurerm_resource_group.rag_rg.name
@@ -25,8 +25,8 @@ resource "azurerm_cognitive_deployment" "chat_model" {
 
   model {
     format  = "OpenAI"
-    name    = "gpt-4o-mini"     
-    version = "2024-07-18"      
+    name    = "gpt-5.4-mini"
+    version = "2026-03-17"
   }
 
   version_upgrade_option = "OnceCurrentVersionExpired"
